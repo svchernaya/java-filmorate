@@ -30,6 +30,9 @@ public class UserController {
     @PutMapping
     public User updateUser(@RequestBody User user) {
         validateUser(user);
+        if (!users.containsKey(user.getId())) {
+            throw new ValidationException("Пользователь с id " + user.getId() + " не найден");
+        }
         users.put(user.getId(), user);
         return user;
     }
