@@ -23,7 +23,7 @@ public class UserController {
     @PostMapping
     public User addUser(@RequestBody User user) {
         validateUser(user);
-        users.setId(nextId++);
+        user.setId(nextId++);
         users.put(user.getId(), user);
         return user;
     }
@@ -38,18 +38,17 @@ public class UserController {
     @GetMapping
     public List<User> getAllUsers() {
         return users.values().stream()
-                .map(Film::getName)
                 .collect(Collectors.toList());
     }
 
     private void validateUser(User user) {
-        if (user.getEmail.isBlank()) {
+        if (user.getEmail().isBlank()) {
             throw new ValidationException("Электронная почта не может быть пустой");
         }
-        if (!user.getEmail.contains("@")) {
-            throw new ValidationException("Электронная почта не должна содержать символ @");
+        if (!user.getEmail().contains("@")) {
+            throw new ValidationException("Электронная почта должна содержать символ @");
         }
-        if (user.getLogin.isBlank()) {
+        if (user.getLogin().isBlank()) {
             throw new ValidationException("Логин не может быть пустым");
         }
         if (user.getLogin().contains(" ")) {
@@ -58,7 +57,7 @@ public class UserController {
         if (user.getBirthday().isAfter(LocalDate.now())){
             throw new ValidationException("Дата рождения не может быть в будущем");
         }
-        if (user.getName().isBlank()){
+        if (user.getName() == null || user.getName().isBlank()){
             user.setName(user.getLogin());
         }
     }
