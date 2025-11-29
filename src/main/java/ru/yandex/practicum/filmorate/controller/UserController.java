@@ -54,10 +54,10 @@ public class UserController {
         if (user.getLogin().contains(" ")) {
             throw new ValidationException("Логин не может содержать пробелы");
         }
-        if (user.getBirthday().isAfter(LocalDate.now())){
+        if (user.getBirthday().isAfter(LocalDate.now())) {
             throw new ValidationException("Дата рождения не может быть в будущем");
         }
-        if (user.getName() == null || user.getName().isBlank()){
+        if (user.getName() == null || user.getName().isBlank()) {
             user.setName(user.getLogin());
         }
     }

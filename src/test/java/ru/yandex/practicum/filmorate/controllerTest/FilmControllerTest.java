@@ -5,7 +5,6 @@ import ru.yandex.practicum.filmorate.controller.FilmController;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.ValidationException;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -16,7 +15,7 @@ class FilmControllerTest {
 
     @Test
     void addFilmWithExact200SymbolsDescription() {
-        Film film = new Film("Фильм", LocalDate.of(2000, Month.DECEMBER, 13), Duration.ofMinutes(70));
+        Film film = new Film("Фильм", LocalDate.of(2000, Month.DECEMBER, 13), 70);
 
         String exact200Symbols = "A".repeat(200);
         film.setDescription(exact200Symbols);
@@ -30,7 +29,7 @@ class FilmControllerTest {
 
     @Test
     void addFilmWithExactMinReleaseDate() {
-        Film film = new Film("Фильм", LocalDate.of(1895, Month.DECEMBER, 28), Duration.ofMinutes(70));
+        Film film = new Film("Фильм", LocalDate.of(1895, Month.DECEMBER, 28), 70);
         film.setDescription("Описание");
 
         Film result = filmController.addFilm(film);
@@ -41,7 +40,7 @@ class FilmControllerTest {
 
     @Test
     void addFilmWithOneDayBeforeMinReleaseDate() {
-        Film film = new Film("Фильм", LocalDate.of(1895, Month.DECEMBER, 27), Duration.ofMinutes(70));
+        Film film = new Film("Фильм", LocalDate.of(1895, Month.DECEMBER, 27), 70);
         film.setDescription("Описание");
 
         try {
@@ -54,18 +53,18 @@ class FilmControllerTest {
 
     @Test
     void addFilmWithOneMinuteDuration() {
-        Film film = new Film("Фильм", LocalDate.of(2000, Month.DECEMBER, 13), Duration.ofMinutes(1));
+        Film film = new Film("Фильм", LocalDate.of(2000, Month.DECEMBER, 13), 1);
         film.setDescription("Описание");
 
         Film result = filmController.addFilm(film);
 
         assertNotNull(result.getId());
-        assertEquals(1, result.getDuration().toMinutes());
+        assertEquals(1, result.getDuration());
     }
 
     @Test
     void addFilmWithZeroMinutesDuration() {
-        Film film = new Film("Фильм", LocalDate.of(2000, Month.DECEMBER, 13), Duration.ofMinutes(0));
+        Film film = new Film("Фильм", LocalDate.of(2000, Month.DECEMBER, 13), 0);
         film.setDescription("Описание");
 
         try {
@@ -78,7 +77,7 @@ class FilmControllerTest {
 
     @Test
     void addFilmWithEmptyName() {
-        Film film = new Film("   ", LocalDate.of(2000, Month.DECEMBER, 13), Duration.ofMinutes(70));
+        Film film = new Film("   ", LocalDate.of(2000, Month.DECEMBER, 13), 70);
         film.setDescription("Описание");
 
         try {

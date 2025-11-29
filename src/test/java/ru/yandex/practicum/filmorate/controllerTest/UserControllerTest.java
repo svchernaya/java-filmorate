@@ -42,7 +42,7 @@ class UserControllerTest {
             userController.addUser(user);
             System.out.println("Должна была быть ошибка ValidationException");
         } catch (ValidationException e) {
-            assertEquals("Электронная почта не должна содержать символ @", e.getMessage());
+            assertEquals("Электронная почта должна содержать символ @", e.getMessage());
         }
     }
 
