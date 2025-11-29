@@ -20,7 +20,7 @@ public class FilmController {
     private int nextId = 1;
 
     @PostMapping
-    public Film addFilm(@RequestBody Film film){
+    public Film addFilm(@RequestBody Film film) {
         validateFilm(film);
         film.setId(nextId++);
         films.put(film.getId(), film);
@@ -36,8 +36,8 @@ public class FilmController {
 
     @GetMapping
     public List<Film> getAllFilms() {
-        return films.values().stream().
-                collect(Collectors.toList());
+        return films.values().stream()
+                .collect(Collectors.toList());
     }
 
     private void validateFilm(Film film) {
