@@ -8,13 +8,13 @@ import java.time.LocalDate;
 
 @Data
 @RequiredArgsConstructor
-public class Film {
+public class User {
     private int id;
     @NonNull
+    private String email;
+    @NonNull
+    private String login;
     private String name;
-    private String description = "";
     @NonNull
-    private LocalDate releaseDate;
-    @NonNull
-    private Integer duration;
+    private LocalDate birthday;
 }
